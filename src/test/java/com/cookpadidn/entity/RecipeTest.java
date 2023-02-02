@@ -64,11 +64,12 @@ public class RecipeTest {
         recipe.setId(uuid);
         recipe.setSteps(lsitOfStep);
 
-        recipe.getSteps().stream.forEach(step -> {
-            step.getPhotoURLs().stream().forEach(url -> System.out.println(url));
+        recipe.getSteps().stream().forEach(step -> {
+            step.getPhotoURls().stream().forEach(System.out::println);
         });
 
-        assertEquals();
+
+        assertEquals(lsitOfStep, recipe.getSteps());
 
 
 

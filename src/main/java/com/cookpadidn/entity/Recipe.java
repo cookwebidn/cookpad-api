@@ -25,5 +25,6 @@ public class Recipe extends AbstractAuditableEntity {
 
     @OneToMany(mappedBy = "recipe")
     private List<Ingredient> ingredients = new ArrayList<>();
-
+    @OneToMany(mappedBy = "steps")
+    private List<Step> steps  = new ArrayList<>();
 }
