@@ -15,8 +15,8 @@ public class IngredientsTest {
         UUID uuid = UUID.randomUUID();
         String ingredientName = "Mentega";
         UOM ounch = UOM.OUNCH;
-
-        Ingredient ingredient = new Ingredient("Mentega", UOM.OUNCH);
+        short measure = 2;
+        Ingredient ingredient = new Ingredient("Mentega", measure, UOM.OUNCH);
         ingredient.setId(uuid);
 
         assertEquals(uuid, ingredient.getId());
