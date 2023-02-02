@@ -1,7 +1,10 @@
 package com.cookpadidn.entity;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
@@ -25,7 +28,7 @@ public class RecipeTest {
     }
 
     @Test
-    void recipeRelationTest() {
+    void recipeRelationWithIngredientTest() {
         UUID uuid = UUID.randomUUID();
         String photoUrl = "https://example.com/recipe.jpg";
         RecipeTag recipeTag = RecipeTag.APPETIZERS;
@@ -38,6 +41,36 @@ public class RecipeTest {
         Recipe recipe = new Recipe("https://example.com/recipe.jpg", RecipeTag.APPETIZERS);
         recipe.setId(uuid);
         recipe.setIngredients(ingredients);
+
+        assertEquals(ingredients, recipe.getIngredients());
+
+    }
+
+    @Test
+    void RecipeRelationWithStep() {
+        UUID uuid = UUID.randomUUID();
+
+        String photoStepUrlOne = "https://example.com/recipe.jpg";
+        String photoStepUrlTwo = "https://example.com/recipe.jpg";
+        String photoStepUrlThree = "https://example.com/recipe.jpg";
+
+        List<String> photoStepUrls = List.of(photoStepUrlOne, photoStepUrlTwo, photoStepUrlThree);
+        Step putThatIntoBoilingWater = new Step("put that into boiling water", photoStepUrls);
+        Step putThatIntoBoilingSoup = new Step("put that into boiling soup", photoStepUrls);
+
+        List<Step> lsitOfStep = List.of(putThatIntoBoilingWater, putThatIntoBoilingSoup);
+
+        Recipe recipe = new Recipe("https://example.com/recipe.jpg", RecipeTag.APPETIZERS);
+        recipe.setId(uuid);
+        recipe.setSteps(lsitOfStep);
+
+        recipe.getSteps().stream.forEach(step -> {
+            step.getPhotoURLs().stream().forEach(url -> System.out.println(url));
+        });
+
+        assertEquals();
+
+
 
     }
 }
