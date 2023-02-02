@@ -1,8 +1,11 @@
 package com.cookpadidn.entity;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IngredientsTest {
 
@@ -11,24 +14,26 @@ public class IngredientsTest {
     void ingredientsTest() {
         UUID uuid = UUID.randomUUID();
         String ingredientName = "Mentega";
-        UOM ounch = UOM.ounch;
+        UOM ounch = UOM.OUNCH;
 
-        Ingredient ingredient = new Ingredient();
-        assertEquals(uuid, ingredient.getUuid());
-        assertEquals(ingredientName, ingredient.getIngredientName());
-        assertEquals(ounch, ingredient.getUOM());
+        Ingredient ingredient = new Ingredient("Mentega", UOM.OUNCH);
+        ingredient.setId(uuid);
+
+        assertEquals(uuid, ingredient.getId());
+        assertEquals(ingredientName, ingredient.getIngredient());
+        assertEquals(ounch, ingredient.getUnitOfMeasure());
     }
 
     @Test
     void ingredientsTestFail() {
         UUID uuid = UUID.randomUUID();
         int ingredientName = 1;
-        UOM ounch = UOM.gram;
+        UOM ounch = UOM.GRAM;
 
         Ingredient ingredient = new Ingredient();
 
-        assertNotEquals(uuid, ingredient.getUuid());
-        assertNotEquals(ingredientName, ingredient.getIngredientName());
-        assertNotEquals(ounch, ingredient.getUOM());
+        Assertions.assertNotEquals(uuid, ingredient.getId());
+        Assertions.assertNotEquals(ingredientName, ingredient.getIngredient());
+        Assertions.assertNotEquals(ounch, ingredient.getUnitOfMeasure());
     }
 }
