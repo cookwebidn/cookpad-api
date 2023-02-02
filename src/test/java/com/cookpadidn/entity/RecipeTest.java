@@ -2,6 +2,7 @@ package com.cookpadidn.entity;
 
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.UUID;
 
@@ -12,16 +13,14 @@ public class RecipeTest {
     void testRecipe() {
         UUID uuid = UUID.randomUUID();
         String photoUrl = "https://example.com/recipe.jpg";
-        RecipeTag recipeTag = RecipeTag.CONDIMENT;
-        Ingredients recipeIngredients = new Inggredients();
-        Step recipeStep = new Step();
+        RecipeTag recipeTag = RecipeTag.APPETIZERS;
 
-        Recipe recipe = new Recipe(uuid, photoUrl, recipeTag, recipeIngredients, recipeStep);
+        Recipe recipe = new Recipe("https://example.com/recipe.jpg", RecipeTag.APPETIZERS);
+        recipe.setId(uuid);
 
-        assertEquals(uuid, recipe.getUuid());
+        assertEquals(uuid, recipe.getId());
         assertEquals(photoUrl, recipe.getPhotoUrl());
         assertEquals(recipeTag, recipe.getRecipeTag());
-
     }
 
 
