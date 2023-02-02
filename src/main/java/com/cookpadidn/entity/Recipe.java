@@ -22,7 +22,6 @@ public class Recipe extends AbstractAuditableEntity {
 
     private String photoUrl;
     private RecipeTag recipeTag;
-
     @OneToMany(mappedBy = "recipe")
     private List<Ingredient> ingredients = new ArrayList<>();
     @OneToMany(mappedBy = "steps")
