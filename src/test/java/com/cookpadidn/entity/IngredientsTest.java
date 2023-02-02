@@ -13,5 +13,10 @@ public class IngredientsTest {
         String ingredientName = "Mentega";
         UOM ounch = UOM.ounch;
 
+        Ingredient ingredient = new Ingredient();
+        assertEquals(uuid, ingredient.getUuid());
+        assertEquals(ingredientName, ingredient.getIngredientName());
+        assertEquals(ounch, ingredient.getUOM());
+
     }
 }
