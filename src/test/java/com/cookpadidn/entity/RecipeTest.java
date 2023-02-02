@@ -23,6 +23,16 @@ public class RecipeTest {
         assertEquals(recipeTag, recipe.getRecipeTag());
     }
 
+    @Test
+    void recipeRelationTest() {
+        UUID uuid = UUID.randomUUID();
+        String photoUrl = "https://example.com/recipe.jpg";
+        RecipeTag recipeTag = RecipeTag.APPETIZERS;
 
+        Ingredient ingredient = new Ingredient("Sugar", 2 ,UOM.TEASPOON);
 
+        Recipe recipe = new Recipe("https://example.com/recipe.jpg", RecipeTag.APPETIZERS);
+        recipe.setId(uuid);
+
+    }
 }
