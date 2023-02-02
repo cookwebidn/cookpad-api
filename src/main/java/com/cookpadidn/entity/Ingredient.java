@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class Ingredient extends AbstractAuditableEntity{
 
     private String ingredient;
+    private Short measure;
     private UOM unitOfMeasure;
 
 }
