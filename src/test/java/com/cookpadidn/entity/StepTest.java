@@ -19,7 +19,7 @@ public class StepTest {
 
         assertEquals(uuid, steps.getId());
         assertEquals(step, steps.getSteps());
-        assertEquals(stepPhotoUrl, steps.getPhotoURls());
+        assertEquals(stepPhotoUrl, steps.getPhotoUrls());
 
     }
 }

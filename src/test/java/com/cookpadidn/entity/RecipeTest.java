@@ -65,7 +65,7 @@ public class RecipeTest {
         recipe.setSteps(lsitOfStep);
 
         recipe.getSteps().stream().forEach(step -> {
-            step.getPhotoURls().stream().forEach(System.out::println);
+            step.getPhotoUrls().stream().forEach(System.out::println);
         });
 
 
