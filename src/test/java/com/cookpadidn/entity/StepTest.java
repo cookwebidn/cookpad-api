@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.UUID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StepTest {
 
@@ -14,10 +15,11 @@ public class StepTest {
         List<String> stepPhotoUrl = List.of("http://somestepimage.com","http://somestepimage2.com");
 
         Step steps = new Step(step, stepPhotoUrl);
+        steps.setId(uuid);
 
-        assertEquals(uuid, steps.getUuid());
-        assertEquals(ingredientName, steps.getIngredientName());
-        assertEquals(ounch, steps.getUOM());
+        assertEquals(uuid, steps.getId());
+        assertEquals(step, steps.getSteps());
+        assertEquals(stepPhotoUrl, steps.getPhotoURls());
 
     }
 }
