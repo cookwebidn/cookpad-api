@@ -17,6 +17,18 @@ public class IngredientsTest {
         assertEquals(uuid, ingredient.getUuid());
         assertEquals(ingredientName, ingredient.getIngredientName());
         assertEquals(ounch, ingredient.getUOM());
+    }
 
+    @Test
+    void ingredientsTestFail() {
+        UUID uuid = UUID.randomUUID();
+        int ingredientName = 1;
+        UOM ounch = UOM.gram;
+
+        Ingredient ingredient = new Ingredient();
+
+        assertNotEquals(uuid, ingredient.getUuid());
+        assertNotEquals(ingredientName, ingredient.getIngredientName());
+        assertNotEquals(ounch, ingredient.getUOM());
     }
 }
