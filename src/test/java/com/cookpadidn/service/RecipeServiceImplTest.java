@@ -1,5 +1,6 @@
 package com.cookpadidn.service;
 
+import com.cookpadidn.dto.RecipeRequest;
 import com.cookpadidn.entity.*;
 import com.cookpadidn.repository.IngredientRepository;
 import com.cookpadidn.repository.RecipeRepository;
@@ -30,7 +31,7 @@ public class RecipeServiceImplTest {
     StepRepository stepRepository;
 
     @InjectMocks
-    RecipeService recipeService;
+    RecipeServiceImpl recipeService;
 
 
     @Test
@@ -58,13 +59,20 @@ public class RecipeServiceImplTest {
         Recipe recipe = new Recipe(photoUrl, recipeTag, ingredients, listOfStep);
 
         when(recipeRepository.save(any(Recipe.class))).thenReturn(recipe);
-        Recipe savedRecipe =  recipeService.addrecipe(recipe);
+
+        RecipeRequest recipeRequest = RecipeRequest.builder().recipeTag(recipe.getRecipeTag())
+                .photoUrl(recipe.getPhotoUrl())
+                .ingredients(recipe.getIngredients())
+                .steps(recipe.getSteps()).build();
+
+        Recipe savedRecipe =  recipeService.addRecipe(recipeRequest);
+
+        System.out.println(recipeTag);
+        System.out.println(savedRecipe.getRecipeTag());
 
         assertEquals(recipeTag, savedRecipe.getRecipeTag());
 
-        verify(recipeRepository, times(3)).save(any(Recipe.class));
-
-
+        verify(recipeRepository, times(1)).save(any(Recipe.class));
 
     }
 }
