@@ -1,6 +1,8 @@
 package com.cookpadidn.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,8 +26,10 @@ public class Recipe extends AbstractAuditableEntity {
 
     private String photoUrl;
     private RecipeTag recipeTag;
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_id")
     private List<Ingredient> ingredients = new ArrayList<>();
-    @OneToMany(mappedBy = "steps")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_id")
     private List<Step> steps  = new ArrayList<>();
 }
