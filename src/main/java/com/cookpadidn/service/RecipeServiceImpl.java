@@ -1,5 +1,6 @@
 package com.cookpadidn.service;
 
+import com.cookpadidn.dto.IngredientRequest;
 import com.cookpadidn.dto.RecipeRequest;
 import com.cookpadidn.entity.Ingredient;
 import com.cookpadidn.entity.Recipe;
@@ -10,6 +11,7 @@ import com.cookpadidn.repository.StepRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -26,14 +28,25 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe addRecipe(RecipeRequest recipeRequest) {
-        List<Ingredient> ingredients = recipeRequest.getIngredients();
-        List<Ingredient> savedIngredient = ingredientRepository.saveAllAndFlush(ingredients);
-        List<Step> savedSteps = stepRepository.saveAll(recipeRequest.getSteps());
+        List<IngredientRequest> ingredients = recipeRequest.getIngredients();
+        List<Ingredient> listOfConvertedIngredient = ingredients.stream().map(ingredientRequest -> Ingredient.builder().ingredient(ingredientRequest.getIngredient())
+                .measure(ingredientRequest.getMeasure())
+                .unitOfMeasure(ingredientRequest.getUnitOfMeasure()).build()).toList();
+        List<Ingredient> savedIngredient = ingredientRepository.saveAllAndFlush(listOfConvertedIngredient);
+        List<Step> listOfConvertedSteps = recipeRequest.getSteps().stream().map(stepRequest -> Step.builder()
+                .steps(stepRequest.getSteps())
+                .photoUrls(stepRequest.getPhotoUrls()).build()).toList();
+        List<Step> savedSteps = stepRepository.saveAll(listOfConvertedSteps);
         Recipe recipe = Recipe.builder().photoUrl(recipeRequest.getPhotoUrl())
                 .recipeTag(recipeRequest.getRecipeTag())
                 .ingredients(savedIngredient)
                 .steps(savedSteps).build();
-//        savedIngredient.forEach(ingredient -> ingredient.setRecipe(recipe));
         return recipeRepository.save(recipe);
+    }
+
+    @Override
+    public Recipe getRecipeById(String id) {
+       return recipeRepository.findById(UUID.fromString(id))
+               .orElseThrow(() -> {throw new RuntimeException("Can't find recipe with id : " + id);});
     }
 }
