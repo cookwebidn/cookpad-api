@@ -24,7 +24,7 @@ public class RecipeRequest {
     private String id;
     private String photoUrl;
     private RecipeTag recipeTag;
-    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<IngredientRequest> ingredients = new ArrayList<>();
 
-    private List<Step> steps  = new ArrayList<>();
+    private List<StepRequest> steps  = new ArrayList<>();
 }
