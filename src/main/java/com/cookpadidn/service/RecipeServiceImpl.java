@@ -68,4 +68,9 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setSteps(savedSteps);
         return recipeRepository.save(recipe);
     }
+
+    @Override
+    public void deleteRecipe(String id) {
+        recipeRepository.deleteById(UUID.fromString(id));
+    }
 }
