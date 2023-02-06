@@ -2,6 +2,7 @@ package com.cookpadidn.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,7 @@ public class Step extends AbstractAuditableEntity {
 
     private String steps;
     private List<String> photoUrls = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "recipe_id", insertable = false, updatable = false)
     private Recipe recipe;
 }

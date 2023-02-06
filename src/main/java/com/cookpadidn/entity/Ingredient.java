@@ -2,6 +2,7 @@ package com.cookpadidn.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,8 @@ public class Ingredient extends AbstractAuditableEntity{
     private Short measure;
     private UOM unitOfMeasure;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "recipe_id", insertable = false, updatable = false)
     private Recipe recipe;
 
 }
