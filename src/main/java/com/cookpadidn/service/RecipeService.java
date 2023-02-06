@@ -8,6 +8,6 @@ public interface RecipeService {
 
     Recipe addRecipe(RecipeRequest recipeRequest);
     Recipe getRecipeById(String id);
-    Recipe updateRecipe(RecipeRequest recipeRequest);
+    Recipe updateRecipe(RecipeRequest recipeRequest, String id);
 
 }
