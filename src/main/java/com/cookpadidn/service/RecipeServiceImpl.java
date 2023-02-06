@@ -49,4 +49,23 @@ public class RecipeServiceImpl implements RecipeService {
        return recipeRepository.findById(UUID.fromString(id))
                .orElseThrow(() -> {throw new RuntimeException("Can't find recipe with id : " + id);});
     }
+
+    @Override
+    public Recipe updateRecipe(RecipeRequest recipeRequest, String id) {
+        Recipe recipe = recipeRepository.findById(UUID.fromString(id)).orElseThrow();
+        List<IngredientRequest> ingredients = recipeRequest.getIngredients();
+        List<Ingredient> listOfConvertedIngredient = ingredients.stream().map(ingredientRequest -> Ingredient.builder().ingredient(ingredientRequest.getIngredient())
+                .measure(ingredientRequest.getMeasure())
+                .unitOfMeasure(ingredientRequest.getUnitOfMeasure()).build()).toList();
+        List<Ingredient> savedIngredient = ingredientRepository.saveAllAndFlush(listOfConvertedIngredient);
+        List<Step> listOfConvertedSteps = recipeRequest.getSteps().stream().map(stepRequest -> Step.builder()
+                .steps(stepRequest.getSteps())
+                .photoUrls(stepRequest.getPhotoUrls()).build()).toList();
+        List<Step> savedSteps = stepRepository.saveAll(listOfConvertedSteps);
+        recipe.setPhotoUrl(recipeRequest.getPhotoUrl());
+        recipe.setRecipeTag(recipeRequest.getRecipeTag());
+        recipe.setIngredients(savedIngredient);
+        recipe.setSteps(savedSteps);
+        return recipeRepository.save(recipe);
+    }
 }
