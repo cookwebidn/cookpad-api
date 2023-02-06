@@ -63,4 +63,28 @@ public class RecipeController {
                 .build();
         return new ResponseEntity<>(getRecipeSuccessfully, HttpStatus.CREATED);
     }
+
+    @PutMapping("/updaterecipe")
+    public ResponseEntity<SuccessResponse> updatedRecipe(@RequestParam("id") String id,
+                                                         @RequestBody RecipeRequest recipeRequest) {
+        Recipe recipe = recipeService.updateRecipe(recipeRequest, id);
+        RecipeRequest recipeDTO = RecipeRequest.builder().photoUrl(recipe.getPhotoUrl())
+                .id(recipe.getId().toString())
+                .recipeTag(recipe.getRecipeTag())
+                .ingredients(recipe.getIngredients().stream().map(ingredient -> IngredientRequest.builder()
+                        .ingredient(ingredient.getIngredient())
+                        .measure(ingredient.getMeasure())
+                        .unitOfMeasure(ingredient.getUnitOfMeasure()).build()).toList())
+                .steps(recipe.getSteps().stream().map(step -> StepRequest.builder()
+                        .steps(step.getSteps())
+                        .photoUrls(step.getPhotoUrls()).build()).toList())
+                .build();
+        SuccessResponse getRecipeSuccessfully = SuccessResponse.builder()
+                .success(Boolean.TRUE)
+                .message("updated recipe successfully")
+                .data(recipeDTO)
+                .build();
+        return new ResponseEntity<>(getRecipeSuccessfully, HttpStatus.CREATED);
+    }
+
 }
