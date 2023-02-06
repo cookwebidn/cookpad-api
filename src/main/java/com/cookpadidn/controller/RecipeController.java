@@ -87,4 +87,16 @@ public class RecipeController {
         return new ResponseEntity<>(getRecipeSuccessfully, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/deletedrecipe")
+    public ResponseEntity<SuccessResponse> deletedRecipe(@RequestParam("id") String id) {
+        recipeService.deleteRecipe(id);
+        SuccessResponse getRecipeSuccessfully = SuccessResponse.builder()
+                .success(Boolean.TRUE)
+                .message("deleted recipe successfully")
+                .build();
+        return new ResponseEntity<>(getRecipeSuccessfully, HttpStatus.CREATED);
+    }
+
 }
+
+
