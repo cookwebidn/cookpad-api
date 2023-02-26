@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Data
@@ -31,5 +30,22 @@ public class SuccessResponse {
     private transient Object data;
 
     public SuccessResponse() {
+    }
+
+    public SuccessResponse(Boolean success, String message) {
+        this.success = success;
+        this.message = message;
+    }
+
+    public SuccessResponse(Boolean success, String message, Object object) {
+        this.success = success;
+        this.message = message;
+        this.data = object;
+    }
+
+    public SuccessResponse(Boolean success, String message, HttpStatus httpStatus) {
+        this.success = success;
+        this.message = message;
+        this.httpStatus = httpStatus;
     }
 }
