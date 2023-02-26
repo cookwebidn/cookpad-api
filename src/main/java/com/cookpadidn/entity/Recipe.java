@@ -32,4 +32,8 @@ public class Recipe extends AbstractAuditableEntity {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id")
     private List<Step> steps  = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_id")
+    private List<User> users = new ArrayList<>();
 }
