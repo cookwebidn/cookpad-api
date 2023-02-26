@@ -10,6 +10,7 @@ import com.cookpadidn.dto.UserResponse;
 import com.cookpadidn.exception.BadRequestException;
 import com.cookpadidn.response.SuccessResponse;
 import com.cookpadidn.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -36,6 +37,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@Tag(name = "Authentication", description = "Authentication Controller | Contains: login, signup, refresh token")
 public class AuthController {
 
     private final Logger log = LoggerFactory.getLogger(AuthController.class);

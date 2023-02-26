@@ -6,12 +6,14 @@ import com.cookpadidn.dto.StepRequest;
 import com.cookpadidn.entity.Recipe;
 import com.cookpadidn.response.SuccessResponse;
 import com.cookpadidn.service.RecipeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/recipe")
+@Tag(name = "Recipe", description = "Recipe Controller | Contains: Add, Update by ID, Get by ID, Delete by ID")
 public class RecipeController {
 
     private final RecipeService recipeService;

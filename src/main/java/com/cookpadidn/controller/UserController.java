@@ -5,6 +5,7 @@ import com.cookpadidn.dto.UserResponse;
 import com.cookpadidn.entity.User;
 import com.cookpadidn.response.SuccessResponse;
 import com.cookpadidn.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
+@Tag(name = "User", description = "User Controller | Contains: Add, Update by ID, Get All, Get by ID/Email, Delete by ID")
 public class UserController {
 
     private final UserService userService;
